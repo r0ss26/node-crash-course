@@ -1,9 +1,12 @@
 const http = require('http');
 const fs = require('fs');
+const _ = require('lodash');
 
 const server = http.createServer((request, response) => {
-  console.log(request.url);
-
+  const num = _.random();
+  const greet = _.once(() => {
+    console.log('hello');
+  });
   // Set header content type
   response.setHeader('Content-Type', 'text/html');
 
@@ -20,7 +23,7 @@ const server = http.createServer((request, response) => {
     case '/about-me':
       response.statusCode = 301;
       response.setHeader('Location', '/about');
-      // response.end();
+    // response.end();
     default:
       response.statusCode = 404;
       path += '404.html';
@@ -28,7 +31,7 @@ const server = http.createServer((request, response) => {
   }
 
   fs.readFile(path, (error, data) => {
-    if (error) {
+    if (error) { 
       console.error(error);
       response.end();
     } else {
