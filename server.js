@@ -17,12 +17,15 @@ const server = http.createServer((request, response) => {
       response.statusCode = 200;
       path += 'about.html';
       break;
+    case '/about-me':
+      response.statusCode = 301;
+      response.setHeader('Location', '/about');
+      // response.end();
     default:
       response.statusCode = 404;
       path += '404.html';
       break;
   }
-
 
   fs.readFile(path, (error, data) => {
     if (error) {
