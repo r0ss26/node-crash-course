@@ -1,5 +1,5 @@
 const express = require('express');
-
+const morgan = require('morgan');
 // express app
 const app = express();
 
@@ -8,6 +8,13 @@ app.set('view engine', 'ejs');
 
 // listen for requests
 app.listen(3000);
+
+app.use(morgan('dev'))
+
+app.use((req, _, next) => {
+ console.log('in the next middleware');
+ next(); 
+})
 
 app.get('/', (req, res) => {
   const blogs = [
