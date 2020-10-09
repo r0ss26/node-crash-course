@@ -1,6 +1,7 @@
 const http = require('http');
 const fs = require('fs');
 const _ = require('lodash');
+require('dotenv').config();
 
 const server = http.createServer((request, response) => {
   const num = _.random();

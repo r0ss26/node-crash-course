@@ -1,20 +1,39 @@
 const express = require('express');
 const morgan = require('morgan');
+require('dotenv').config();
+const mongoose = require('mongoose');
+
 // express app
 const app = express();
+
+// Connect to MongoDB
+mongoose
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    // listen for requests
+    console.log('MongoDB connected');
+    app.listen(3000);
+  })
+  .catch(error => {
+    console.log(error);
+  });
 
 // register template engine
 app.set('view engine', 'ejs');
 
-// listen for requests
-app.listen(3000);
+app.use(express.static('public'));
 
-app.use(morgan('dev'))
+app.use(morgan('dev'));
+
+// mongoose and mongo sandbox routes
 
 app.use((req, _, next) => {
- console.log('in the next middleware');
- next(); 
-})
+  console.log('in the next middleware');
+  next();
+});
 
 app.get('/', (req, res) => {
   const blogs = [
@@ -45,7 +64,7 @@ app.get('/blogs/create', (req, res) => {
 
 // 404
 app.use((req, res) => {
-  res.status(404).render('404', { title: '404'});
+  res.status(404).render('404', { title: '404' });
 });
 
 // 404
