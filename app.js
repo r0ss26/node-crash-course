@@ -38,7 +38,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/about', (req, res) => {
-  res.render('about', { title: 'About' });
+  res.render('blogs/about', { title: 'About' });
 });
 
 // 404

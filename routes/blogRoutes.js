@@ -4,7 +4,7 @@ const {
   blogCreateGet,
   blogCreatePost,
   blogDelete,
-} = require('../controllers/blogController');
+} = require('../controllers/blogsController');
 
 // Blog Routes
 const express = require('express');
