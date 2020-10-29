@@ -1,15 +1,13 @@
 const Blog = require('../models/blog');
 
-const blogIndex = (req, res) => {
+const blogIndex = (req, res, next) => {
   Blog.find()
     .sort({ createdAt: -1 })
     .then(result => {
-      res.render('blogs/index', { title: 'All Blogs', blogs: result });
+      res.render('blogs/index2', { title: 'All Blogs', blogs: result });
       return result;
     })
-    .catch(error => {
-      return error;
-    });
+    .catch(next);
 };
 
 const blogDetails = (req, res) => {
@@ -29,7 +27,7 @@ const blogCreatePost = (req, res) => {
   new Blog({
     title,
     snippet,
-    body,
+    bod,
   })
     .save()
     .then(result => {

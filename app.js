@@ -46,4 +46,9 @@ app.use((req, res) => {
   res.status(404).render('404', { title: '404' });
 });
 
+app.use((error, req, res, next) => {
+  console.error(error);
+  res.status(500).send('Something broke!');
+})
+
 
